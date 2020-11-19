@@ -14,13 +14,13 @@ xy_data = np.vstack(([x_data.T], [y_data.T])).T # combine individual points into
 data = np.vstack(([x_data.T], [y_data.T], [z_data.T])).T
 
 # Common ops functions
-def angle_between(v1, v2):
-    """Calculates the angle between two vectors in radians"""
-    dot_pr = v1.dot(v2)
-    norms = np.linalg.norm(v1) * np.linalg.norm(v2)
-    return np.arccos(dot_pr / norms)
-def calc_mse(real, pred):
-    return np.square(np.subtract(real,pred)).mean() 
+    def angle_between(v1, v2):
+        """Calculates the angle between two vectors in radians"""
+        dot_pr = v1.dot(v2)
+        norms = np.linalg.norm(v1) * np.linalg.norm(v2)
+        return np.arccos(dot_pr / norms)
+    def calc_mse(real, pred):
+        return np.square(np.subtract(real,pred)).mean() 
 
 # Calculate thetas
 thetas = []

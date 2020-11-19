@@ -24,7 +24,7 @@ def test_component(filename_list, expected_list, function_to_extract, function_t
 def test_track_finder(analysis, mod):
     filename_list = []
     for i in range(1,6):
-        filename_list.append("TestData\\Mod %d - trackIDEvent%d.txt" % (mod, i))
+        filename_list.append("TestData/Mod %d - trackIDEvent%d.txt" % (mod, i))
     expected_list = ["1 has one track", "2 has two tracks", "3 has three tracks", "4 has three tracks", "5 has 20 tracks"]
     extract_function = lambda filename : get_event(filename).tracker_hits
     run_function = lambda data :analysis.track_finder.identify_tracks(data)
@@ -35,7 +35,7 @@ def test_track_finder(analysis, mod):
 def test_vertex_finder(analysis, mod):
     filename_list = []
     for i in range(1,6):
-        filename_list.append("TestData\\Mod %d - trackIDseparateParticles%d.txt" % (mod, i))
+        filename_list.append("TestData/Mod %d - trackIDseparateParticles%d.txt" % (mod, i))
     expected_list = ["vertex z = 0", "vertex z = .3", "vertex z = -.2", "vertex z = .4", "vertex z = -.3"]
     reader = FileReader()
     extract_function = lambda filename : reader.get_all_tracks(filename)
@@ -110,7 +110,7 @@ def get_true_pT():
 def test_track_phi_eta_finder(analysis, mod):
     filename_list = []
     for i in range(1,6):
-        filename_list.append("TestData\\Mod %d - trackIDseparateParticles%d.txt" % (mod, i))
+        filename_list.append("TestData/Mod %d - trackIDseparateParticles%d.txt" % (mod, i))
     expected_list = ["event 1", "event 2", "event 3", "event 4", "event 5"]
     vertex_list = get_true_vertex()
     phis, etas = get_true_phi_eta()
@@ -130,7 +130,7 @@ def test_track_phi_eta_finder(analysis, mod):
 def test_track_pT_finder(analysis, mod):
     filename_list = []
     for i in range(1,6):
-        filename_list.append("TestData\\Mod %d - trackIDseparateParticles%d.txt" % (mod, i))
+        filename_list.append("TestData/Mod %d - trackIDseparateParticles%d.txt" % (mod, i))
     expected_list = ["event 1", "event 2", "event 3", "event 4", "event 5"]
     vertex_list = get_true_vertex()
     phis, etas = get_true_phi_eta()
@@ -179,12 +179,12 @@ def get_true_tracks_for_cluster_matching(mod):
     final_tracks = []
     reader = FileReader()
     for i in range(5):
-        tracks = reader.get_all_tracks("TestData\\" + filename_list[i])
+        tracks = reader.get_all_tracks("TestData/" + filename_list[i])
         if (i == 2 or i == 3):
             if (i == 2):
-                true_tracks = read_track_values("TestData\\Mod %d - clusterIDTrueValues3.txt" % mod)
+                true_tracks = read_track_values("TestData/Mod %d - clusterIDTrueValues3.txt" % mod)
             else:
-                true_tracks = read_track_values("TestData\\Mod %d - clusterIDTrueValues5.txt" % mod)
+                true_tracks = read_track_values("TestData/Mod %d - clusterIDTrueValues5.txt" % mod)
 
             for i_track in range(len(tracks)):
                 tracks[i_track].set_vertex(vertex_list[i])
@@ -206,7 +206,7 @@ def get_true_tracks_for_cluster_matching(mod):
 def get_true_tracks_for_muon_stub_matching(mod):
     filename_list = []
     for i in range(1,6):
-        filename_list.append("TestData\\Mod %d - muonIDseparateParticles%d.txt" % (mod, i))
+        filename_list.append("TestData/Mod %d - muonIDseparateParticles%d.txt" % (mod, i))
     vertex_list = get_true_vertex()
     phis, etas = get_true_phi_eta()
     pTs = get_true_pT()
