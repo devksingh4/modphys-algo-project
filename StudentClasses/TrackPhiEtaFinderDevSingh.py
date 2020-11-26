@@ -50,7 +50,7 @@ class TrackPhiEtaFinderDevSingh():
         plt.show()
         if (np.average(x_data[0]) < 0  and np.average(y_data) < 0): # account for range of arccos() being from 0 to pi and not 2 pi
             phi += np.pi
-        if (np.average(x_data) > 0 and np.average(y_data) < 0):
+        if (np.average(x_data) > 0 and np.average(y_data) < 0 and phi != 0):
             phi = -1 * phi
         while eta > np.pi:
             eta = eta - (np.pi)
