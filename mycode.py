@@ -14,19 +14,19 @@ xy_data = np.vstack(([x_data.T], [y_data.T])).T # combine individual points into
 data = np.vstack(([x_data.T], [y_data.T], [z_data.T])).T
 
 # Common ops functions
-    def angle_between(v1, v2):
-        """Calculates the angle between two vectors in radians"""
-        dot_pr = v1.dot(v2)
-        norms = np.linalg.norm(v1) * np.linalg.norm(v2)
-        return np.arccos(dot_pr / norms)
-    def calc_mse(real, pred):
-        return np.square(np.subtract(real,pred)).mean() 
+def angle_between(v1, v2):
+    """Calculates the angle between two vectors in radians"""
+    dot_pr = v1.dot(v2)
+    norms = np.linalg.norm(v1) * np.linalg.norm(v2)
+    return np.arccos(dot_pr / norms)
+def calc_mse(real, pred):
+    return np.square(np.subtract(real,pred)).mean() 
 
 # Calculate thetas
 thetas = []
 for v1 in data:
     # vector in form <x, y, z>, angle to z-axis
-    theta = angle_between(v1, np.array([0,0,1]))
+    theta = angle_between(np.array([v1[2], v1[0]]), np.array([1,0]))
     thetas.append(theta)
 thetas = np.array(thetas)
 df['Center-of-Mass Scattering Angle (radians)'] = thetas
