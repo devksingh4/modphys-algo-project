@@ -34,16 +34,14 @@ class TrackPhiEtaFinderDevSingh():
             theta = angle_between(np.array(v1), np.array([0,0,1]))
             thetas.append(theta)
         thetas = np.array(thetas)
-        etas = -1 * np.log(np.tan(thetas/2))
-        eta = etas[0]
-        plt.plot(x_data, etas)
-        plt.show()
         phis = []
         for v1 in data:
             # vector in form <x, y>, angle to x-axis
             phi = angle_between(np.array([v1[0], v1[1]]), np.array([1,0]))
             phis.append(phi)    
-        phi = np.interp(vertex, x_data, phis) # linear interpolation 
+        phi = np.interp(vertex, x_data, phis) # linear interpolation to vertex
+        theta_pred = np.interp(vertex, x_data, thetas)
+        eta = -1 * np.log(np.tan(theta_pred/2))
         if (np.average(x_data[0]) < 0  and np.average(y_data) < 0): # account for range of arccos() being from 0 to pi and not 2 pi
             phi += np.pi
         if (np.average(x_data) > 0 and np.average(y_data) < 0 and phi != 0):
