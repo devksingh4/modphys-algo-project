@@ -1,6 +1,6 @@
 import itertools
 import math
-
+import numpy as np
 from FileReader import FileReader
 from Vector import Vector
 
@@ -106,7 +106,8 @@ def get_true_pT():
         pTs.append(event_pT)
 
     return pTs
-
+def calc_mse(real, pred):
+    return np.square(np.subtract(np.array(real),np.array(pred))).mean() 
 def test_track_phi_eta_finder(analysis, mod):
     filename_list = []
     for i in range(1,6):
@@ -114,7 +115,10 @@ def test_track_phi_eta_finder(analysis, mod):
     expected_list = ["event 1", "event 2", "event 3", "event 4", "event 5"]
     vertex_list = get_true_vertex()
     phis, etas = get_true_phi_eta()
-
+    phi_real = []
+    phi_pred = []
+    eta_real = []
+    eta_pred = []
     reader = FileReader()
     for i in range(5):
         print("Now testing event %d:" % (i + 1))
@@ -125,7 +129,14 @@ def test_track_phi_eta_finder(analysis, mod):
 
             print("True phi: %f\tTrue eta: %f" % (phis[i][i_track], etas[i][i_track]))
             print("Your phi: %f\tYour eta: %f" % (phi, eta))
+            phi_real.append(phis[i][i_track])
+            eta_real.append(etas[i][i_track])
+            phi_pred.append(phi)
+            eta_pred.append(eta)
             print("")
+    phi_mse = calc_mse(phi_real, phi_pred)
+    eta_mse = calc_mse(eta_real, eta_pred)
+    print("Phi MSE is {}, Eta MSE is {}".format(phi_mse, eta_mse))
 
 def test_track_pT_finder(analysis, mod):
     filename_list = []
