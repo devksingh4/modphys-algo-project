@@ -106,7 +106,7 @@ def get_true_pT():
         pTs.append(event_pT)
 
     return pTs
-def calc_mse(real, pred):
+def calc_L2(real, pred):
     return np.square(np.subtract(np.array(real),np.array(pred))).mean() 
 def test_track_phi_eta_finder(analysis, mod):
     filename_list = []
@@ -134,9 +134,9 @@ def test_track_phi_eta_finder(analysis, mod):
             phi_pred.append(phi)
             eta_pred.append(eta)
             print("")
-    phi_mse = calc_mse(phi_real, phi_pred)
-    eta_mse = calc_mse(eta_real, eta_pred)
-    print("Phi MSE is {}, Eta MSE is {}".format(phi_mse, eta_mse))
+    phi_L2 = calc_L2(phi_real, phi_pred)
+    eta_L2 = calc_L2(eta_real, eta_pred)
+    print("Phi L2 Loss is {}, Eta L2 Loss is {}".format(phi_L2, eta_L2))
 
 def test_track_pT_finder(analysis, mod):
     filename_list = []
